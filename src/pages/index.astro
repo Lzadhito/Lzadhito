@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Homepage from "../components/home/Homepage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { navigate } from "astro:transitions/client";
+
+const blogEntries = await getCollection("software-engineering");
+const blogs = blogEntries.map(async (entry) => {
+  const { Content } = await entry.render();
+  return Content;
+});
+---
+
+<BaseLayout>
+  <Homepage />
+  <div data-blogs={blogEntries} class="mt-16 grid gap-4">
+    {
+      blogs.map((Content, i) => (
+        <>
+          {i !== 0 && <hr />}
+          <div
+            id={"blog-" + blogEntries[i].slug}
+            class="cursor-pointer card shadow-xl bg-base-100 w-full max-h-[400px] overflow-hidden"
+          >
+            <div class="card-body">
+              <h1 class="card-title">{blogEntries[i].data.title}</h1>
+              <Content />
+            </div>
+          </div>
+        </>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const blogs = document.querySelectorAll('[id^="blog-"]');
+  blogs.forEach((blog) =>
+    blog.addEventListener("click", () => {
+      const slug = blog.id.replace("blog-", "");
+      navigate("/blog/" + slug);
+    })
+  );
+</script>
