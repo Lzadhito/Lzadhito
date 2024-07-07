@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import Homepage from "../components/home/Homepage";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { navigate } from "astro:transitions/client";
 
 const blogEntries = await getCollection("software-engineering");
 const blogs = blogEntries.map(async (entry) => {
@@ -24,6 +23,7 @@ const blogs = blogEntries.map(async (entry) => {
           >
             <div class="card-body">
               <h1 class="card-title">{blogEntries[i].data.title}</h1>
+              {/* @ts-ignore */}
               <Content />
             </div>
           </div>
