@@ -6,5 +6,7 @@ import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), solidJs()]
+  site: "https://lzadhito.github.io",
+  base: "lzadhito",
+  integrations: [mdx(), tailwind(), solidJs()],
 });

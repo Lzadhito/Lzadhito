@@ -54,7 +54,7 @@ type JobCardProps = { title: string; description: string };
 function JobCard(props: JobCardProps) {
   return (
     <a href="/job/:id" class="no-underline ">
-      <div class="card bg-base-100 max-h-[45vh] w-full shadow-xl">
+      <div class="card hover:scale-110 duration-100 bg-base-100 max-h-[45vh] w-full shadow-xl">
         <figure class="w-full min-h-40 h-40">
           <img
             class="object-cover"
